@@ -41,4 +41,9 @@
     <ProjectReference Include="..\Identity.Web\Identity.Web.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj" />
+    <ProjectReference Include="..\Identity.Web\Identity.Web.csproj" />
+  </ItemGroup>
+
 </Project>

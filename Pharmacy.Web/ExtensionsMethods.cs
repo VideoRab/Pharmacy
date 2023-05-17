@@ -1,4 +1,4 @@
-﻿using Common.Mappers;
+using Common.Mappers;
 using Common.Services;
 using Common.Services.Interfaces;
 using DAL.Abstraction;
@@ -34,7 +34,7 @@ public static class ExtensionMethods
         services.AddTransient<OrderMapper>();
         services.AddTransient<UserMapper>();
     }
-
+  
     public static void ConfigureAuthService(this IServiceCollection services, IConfiguration configuration)
     {
         JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
