@@ -1,5 +1,6 @@
 using DAL.Data;
 using Microsoft.EntityFrameworkCore;
+using Pharmacy.Web.Middlewares;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace Pharmacy.Web
@@ -23,6 +24,9 @@ namespace Pharmacy.Web
             });
 
             builder.Services.ConfigureDbInitializer();
+            builder.Services.AddRepositories();
+            builder.Services.AddServices();
+            builder.Services.AddMappers();
 
             var app = builder.Build();
 
@@ -38,6 +42,8 @@ namespace Pharmacy.Web
                 });
                 app.DbInitialize();
             }
+
+            app.UseMiddleware<ExceptionHandler>();
 
             app.UseRouting();
 

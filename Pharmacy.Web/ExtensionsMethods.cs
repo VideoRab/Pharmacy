@@ -1,7 +1,9 @@
-﻿using DAL.Abstraction;
+﻿using Common.Mappers;
+using Common.Services;
+using Common.Services.Interfaces;
+using DAL.Abstraction;
 using DAL.Data;
-using Entities;
-using Microsoft.AspNetCore.Identity;
+using DAL.Repositories;
 using Microsoft.OpenApi.Models;
 using System.IdentityModel.Tokens.Jwt;
 
@@ -12,6 +14,25 @@ public static class ExtensionMethods
     public static void ConfigureDbInitializer(this IServiceCollection services)
     {
         services.AddTransient<IDbInitializer, DbInitializer>();
+    }
+
+    public static void AddRepositories(this IServiceCollection services)
+    {
+        services.AddTransient<IMedicineRepository, MedicineRepository>();
+        services.AddTransient<IOrderRepository, OrderRepository>();
+    }
+
+    public static void AddServices(this IServiceCollection services)
+    {
+        services.AddTransient<IMedicineService, MedicineService>();
+        services.AddTransient<IOrderService, OrderService>();
+    }
+
+    public static void AddMappers(this IServiceCollection services)
+    {
+        services.AddTransient<MedicineMapper>();
+        services.AddTransient<OrderMapper>();
+        services.AddTransient<UserMapper>();
     }
 
     public static void ConfigureAuthService(this IServiceCollection services, IConfiguration configuration)
