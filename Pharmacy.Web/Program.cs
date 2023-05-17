@@ -1,3 +1,7 @@
+using DAL.Data;
+using Microsoft.EntityFrameworkCore;
+using Pharmacy.Web.Middlewares;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace Pharmacy.Web
 {
@@ -7,26 +11,48 @@ namespace Pharmacy.Web
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGenWithAuth(builder.Configuration);
+            builder.Services.ConfigureAuthService(builder.Configuration);
+
+            builder.Services.AddDbContext<ApplicationContext>(optionsAction =>
+            {
+                optionsAction.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationDatabaseConnection"),
+                    migration => migration.MigrationsAssembly(typeof(Program).Assembly.FullName));
+                optionsAction.UseLazyLoadingProxies();
+            });
+
+            builder.Services.ConfigureDbInitializer();
+            builder.Services.AddIdentities();
+            builder.Services.AddRepositories();
+            builder.Services.AddServices();
+            builder.Services.AddMappers();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger Game");
+                    options.DocExpansion(DocExpansion.List);
+                    options.OAuthClientId("Api");
+                    options.OAuthClientSecret("client_secret");
+                });
+                app.DbInitialize();
             }
+
+            app.UseMiddleware<ExceptionHandler>();
+
+            app.UseRouting();
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.UseAuthentication();
 
+            app.UseAuthorization();
 
             app.MapControllers();
 
