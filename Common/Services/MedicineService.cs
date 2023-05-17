@@ -2,22 +2,29 @@
 using Common.Services.Interfaces;
 using DAL.Abstraction;
 using Entities.DTO;
+using FluentValidation;
 
 namespace Common.Services;
 
 public class MedicineService : IMedicineService
 {
     private readonly IMedicineRepository _medicineRepository;
+    private readonly IValidator<MedicineDto> _validator;
     private readonly MedicineMapper _mapper;
 
-    public MedicineService(IMedicineRepository repository, MedicineMapper mapper)
+    public MedicineService(IMedicineRepository repository,
+        IValidator<MedicineDto> validator,
+        MedicineMapper mapper)
     {
         _medicineRepository = repository;
+        _validator = validator;
         _mapper = mapper;
     }
 
     public async Task CreateAsync(MedicineDto medicineDto, CancellationToken cancellationToken)
     {
+        _validator.ValidateAndThrow(medicineDto);
+
         var medicine = _mapper.Map(medicineDto);
 
         await _medicineRepository.CreateAsync(medicine, cancellationToken);
@@ -62,6 +69,8 @@ public class MedicineService : IMedicineService
 
     public async Task UpdateAsync(MedicineDto medicineDto, CancellationToken cancellationToken)
     {
+        _validator.ValidateAndThrow(medicineDto);
+
         var medicine = _mapper.Map(medicineDto);
 
         await _medicineRepository.UpdateAsync(medicine, cancellationToken);
