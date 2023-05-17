@@ -1,5 +1,6 @@
 ﻿using Common.Services.Interfaces;
 using Entities.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Pharmacy.Web.Controllers
@@ -31,6 +32,7 @@ namespace Pharmacy.Web.Controllers
             return Ok(medicine);
         }
 
+        [Authorize]
         [HttpPost("create")]
         public async Task<IActionResult> CreateAsync(MedicineDto medicineDto, CancellationToken cancellationToken)
         {
@@ -39,6 +41,7 @@ namespace Pharmacy.Web.Controllers
             return Ok("Medicine has been created =)");
         }
 
+        [Authorize]
         [HttpPut("update")]
         public async Task<IActionResult> UpdateAsync(MedicineDto medicineDto, CancellationToken cancellationToken)
         {
@@ -47,6 +50,7 @@ namespace Pharmacy.Web.Controllers
             return Ok("Medicine has been updated =)");
         }
 
+        [Authorize]
         [HttpDelete("delete")]
         public async Task<IActionResult> DeleteByIdAsync(Guid id, CancellationToken cancellationToken)
         {
