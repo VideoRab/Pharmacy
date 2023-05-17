@@ -24,6 +24,8 @@ public static class ExtensionMethods
 
     public static void AddServices(this IServiceCollection services)
     {
+        services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
+        services.AddTransient<IIdentityService, IdentityService>();
         services.AddTransient<IMedicineService, MedicineService>();
         services.AddTransient<IOrderService, OrderService>();
     }
