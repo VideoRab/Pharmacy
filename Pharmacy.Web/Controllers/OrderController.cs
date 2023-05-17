@@ -1,6 +1,7 @@
 ﻿using Common.Services.Interfaces;
 using Entities;
 using Entities.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Pharmacy.Web.Controllers
@@ -16,6 +17,7 @@ namespace Pharmacy.Web.Controllers
             _orderService = orderService;
         }
 
+        [Authorize]
         [HttpGet("getAll")]
         public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken)
         {
@@ -24,6 +26,7 @@ namespace Pharmacy.Web.Controllers
             return Ok(orders);
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {
@@ -32,6 +35,7 @@ namespace Pharmacy.Web.Controllers
             return Ok(order);
         }
 
+        [Authorize]
         [HttpPost("create")]
         public async Task<IActionResult> CreateAsync(OrderDto orderDto, CancellationToken cancellationToken)
         {
@@ -40,6 +44,7 @@ namespace Pharmacy.Web.Controllers
             return Ok("Order has been created =)");
         }
 
+        [Authorize]
         [HttpPut("update")]
         public async Task<IActionResult> UpdateAsync(OrderDto orderDto, CancellationToken cancellationToken)
         {
@@ -48,6 +53,7 @@ namespace Pharmacy.Web.Controllers
             return Ok("Order has been updated =)");
         }
 
+        [Authorize]
         [HttpDelete("delete")]
         public async Task<IActionResult> DeleteByIdAsync(Guid id, CancellationToken cancellationToken)
         {

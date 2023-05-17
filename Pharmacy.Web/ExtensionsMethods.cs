@@ -1,10 +1,13 @@
 using Common.Mappers;
 using Common.Services;
 using Common.Services.Interfaces;
+using Common.Validation;
 using DAL.Abstraction;
 using DAL.Data;
 using DAL.Repositories;
 using Entities;
+using Entities.DTO;
+using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
 using System.IdentityModel.Tokens.Jwt;
@@ -16,6 +19,12 @@ public static class ExtensionMethods
     public static void ConfigureDbInitializer(this IServiceCollection services)
     {
         services.AddTransient<IDbInitializer, DbInitializer>();
+    }
+
+    public static void AddValidators(this IServiceCollection services)
+    {
+        services.AddScoped<IValidator<OrderDto>, OrderValidator>();
+        services.AddScoped<IValidator<MedicineDto>, MedicineValidator>();
     }
 
     public static void AddIdentities(this IServiceCollection services)
