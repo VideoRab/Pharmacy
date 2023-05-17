@@ -24,6 +24,7 @@ namespace Pharmacy.Web
             });
 
             builder.Services.ConfigureDbInitializer();
+            builder.Services.AddIdentities();
             builder.Services.AddRepositories();
             builder.Services.AddServices();
             builder.Services.AddMappers();
