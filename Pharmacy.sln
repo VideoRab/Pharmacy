@@ -5,11 +5,13 @@ VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pharmacy.Web", "Pharmacy.Web\Pharmacy.Web.csproj", "{A109D534-F476-4542-8734-5DDFD60BC836}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{AE400C0F-E86A-4D12-B459-6894EEF71698}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{AE400C0F-E86A-4D12-B459-6894EEF71698}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{F8ECDCCA-4F68-4270-B7CB-80C14CE872F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{F8ECDCCA-4F68-4270-B7CB-80C14CE872F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Web", "Identity.Web\Identity.Web.csproj", "{F0B4CF88-6AD6-4457-BF5C-EFB8B1BE92F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Web", "Identity.Web\Identity.Web.csproj", "{F0B4CF88-6AD6-4457-BF5C-EFB8B1BE92F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{F5042839-DEB9-4950-BA1E-8E9CA827A243}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{F0B4CF88-6AD6-4457-BF5C-EFB8B1BE92F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0B4CF88-6AD6-4457-BF5C-EFB8B1BE92F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0B4CF88-6AD6-4457-BF5C-EFB8B1BE92F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5042839-DEB9-4950-BA1E-8E9CA827A243}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5042839-DEB9-4950-BA1E-8E9CA827A243}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5042839-DEB9-4950-BA1E-8E9CA827A243}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5042839-DEB9-4950-BA1E-8E9CA827A243}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
