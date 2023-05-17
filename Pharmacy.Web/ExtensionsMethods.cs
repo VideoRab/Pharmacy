@@ -4,6 +4,8 @@ using Common.Services.Interfaces;
 using DAL.Abstraction;
 using DAL.Data;
 using DAL.Repositories;
+using Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
 using System.IdentityModel.Tokens.Jwt;
 
@@ -16,6 +18,14 @@ public static class ExtensionMethods
         services.AddTransient<IDbInitializer, DbInitializer>();
     }
 
+    public static void AddIdentities(this IServiceCollection services)
+    {
+        services.AddDefaultIdentity<User>()
+            .AddEntityFrameworkStores<ApplicationContext>()
+            .AddUserManager<UserManager<User>>()
+            .AddDefaultTokenProviders();
+    }
+
     public static void AddRepositories(this IServiceCollection services)
     {
         services.AddTransient<IMedicineRepository, MedicineRepository>();
@@ -24,6 +34,7 @@ public static class ExtensionMethods
 
     public static void AddServices(this IServiceCollection services)
     {
+        services.AddTransient<IUserService, UserService>();
         services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
         services.AddTransient<IIdentityService, IdentityService>();
         services.AddTransient<IMedicineService, MedicineService>();
